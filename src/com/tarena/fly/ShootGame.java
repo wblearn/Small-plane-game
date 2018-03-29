@@ -53,7 +53,7 @@ public class ShootGame extends JPanel {
 					.read(ShootGame.class.getResource("airplane.png"));
 			bee = ImageIO.read(ShootGame.class.getResource("bee.png"));
 			bullet = ImageIO.read(ShootGame.class.getResource("bullet.png"));
-			hero0 = ImageIO.read(ShootGame.class.getResource("hero0.png"));
+			hero0 = ImageIO.read(ShootGame.class.getResource("hero0.png"));//这里有错
 			hero1 = ImageIO.read(ShootGame.class.getResource("hero1.png"));
 			pause = ImageIO.read(ShootGame.class.getResource("pause.png"));
 			gameover = ImageIO
@@ -124,6 +124,11 @@ public class ShootGame extends JPanel {
 	}
 
 	public static void main(String[] args) {
+		String str = "1";
+		if(str.equals("0"))
+		{
+			System.out.println("str");
+		}
 		JFrame frame = new JFrame("Fly");
 		ShootGame game = new ShootGame(); // 面板对象
 		frame.add(game); // 将面板添加到JFrame中
