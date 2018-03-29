@@ -17,18 +17,18 @@ import javax.swing.JFrame;
 import javax.swing.JPanel;
 
 public class ShootGame extends JPanel {
-	public static final int WIDTH = 400; // Ãæ°å¿í
-	public static final int HEIGHT = 654; // Ãæ°å¸ß
-	/** ÓÎÏ·µÄµ±Ç°×´Ì¬: START RUNNING PAUSE GAME_OVER */
+	public static final int WIDTH = 400; // ï¿½ï¿½ï¿½ï¿½
+	public static final int HEIGHT = 654; // ï¿½ï¿½ï¿½ï¿½
+	/** ï¿½ï¿½Ï·ï¿½Äµï¿½Ç°×´Ì¬: START RUNNING PAUSE GAME_OVER */
 	private int state;
 	private static final int START = 0;
 	private static final int RUNNING = 1;
 	private static final int PAUSE = 2;
 	private static final int GAME_OVER = 3;
 
-	private int score = 0; // µÃ·Ö
-	private Timer timer; // ¶¨Ê±Æ÷
-	private int intervel = 1000 / 100; // Ê±¼ä¼ä¸ô(ºÁÃë)
+	private int score = 0; // ï¿½Ã·ï¿½
+	private Timer timer; // ï¿½ï¿½Ê±ï¿½ï¿½
+	private int intervel = 1000 / 100; // Ê±ï¿½ï¿½ï¿½ï¿½(ï¿½ï¿½ï¿½ï¿½)
 
 	public static BufferedImage background;
 	public static BufferedImage start;
@@ -40,11 +40,11 @@ public class ShootGame extends JPanel {
 	public static BufferedImage pause;
 	public static BufferedImage gameover;
 
-	private FlyingObject[] flyings = {}; // µÐ»úÊý×é
-	private Bullet[] bullets = {}; // ×Óµ¯Êý×é
-	private Hero hero = new Hero(); // Ó¢ÐÛ»ú
+	private FlyingObject[] flyings = {}; // ï¿½Ð»ï¿½ï¿½ï¿½ï¿½ï¿½
+	private Bullet[] bullets = {}; // ï¿½Óµï¿½ï¿½ï¿½ï¿½ï¿½
+	private Hero hero = new Hero(); // Ó¢ï¿½Û»ï¿½
 
-	static { // ¾²Ì¬´úÂë¿é£¬³õÊ¼»¯Í¼Æ¬×ÊÔ´
+	static { // ï¿½ï¿½Ì¬ï¿½ï¿½ï¿½ï¿½é£¬ï¿½ï¿½Ê¼ï¿½ï¿½Í¼Æ¬ï¿½ï¿½Ô´
 		try {
 			background = ImageIO.read(ShootGame.class
 					.getResource("background.png"));
@@ -53,7 +53,7 @@ public class ShootGame extends JPanel {
 					.read(ShootGame.class.getResource("airplane.png"));
 			bee = ImageIO.read(ShootGame.class.getResource("bee.png"));
 			bullet = ImageIO.read(ShootGame.class.getResource("bullet.png"));
-			hero0 = ImageIO.read(ShootGame.class.getResource("hero0.png"));//ÕâÀïÓÐ´í
+			hero0 = ImageIO.read(ShootGame.class.getResource("hero0.png"));//ï¿½ï¿½ï¿½ï¿½ï¿½Ð´ï¿½
 			hero1 = ImageIO.read(ShootGame.class.getResource("hero1.png"));
 			pause = ImageIO.read(ShootGame.class.getResource("pause.png"));
 			gameover = ImageIO
@@ -63,23 +63,23 @@ public class ShootGame extends JPanel {
 		}
 	}
 
-	/** »­ */
+	/** ï¿½ï¿½ */
 	@Override
 	public void paint(Graphics g) {
-		g.drawImage(background, 0, 0, null); // »­±³¾°Í¼
-		paintHero(g); // »­Ó¢ÐÛ»ú
-		paintBullets(g); // »­×Óµ¯
-		paintFlyingObjects(g); // »­·ÉÐÐÎï
-		paintScore(g); // »­·ÖÊý
-		paintState(g); // »­ÓÎÏ·×´Ì¬
+		g.drawImage(background, 0, 0, null); // ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Í¼
+		paintHero(g); // ï¿½ï¿½Ó¢ï¿½Û»ï¿½
+		paintBullets(g); // ï¿½ï¿½ï¿½Óµï¿½
+		paintFlyingObjects(g); // ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
+		paintScore(g); // ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
+		paintState(g); // ï¿½ï¿½ï¿½ï¿½Ï·×´Ì¬
 	}
 
-	/** »­Ó¢ÐÛ»ú */
+	/** ï¿½ï¿½Ó¢ï¿½Û»ï¿½ */
 	public void paintHero(Graphics g) {
 		g.drawImage(hero.getImage(), hero.getX(), hero.getY(), null);
 	}
 
-	/** »­×Óµ¯ */
+	/** ï¿½ï¿½ï¿½Óµï¿½ */
 	public void paintBullets(Graphics g) {
 		for (int i = 0; i < bullets.length; i++) {
 			Bullet b = bullets[i];
@@ -88,7 +88,7 @@ public class ShootGame extends JPanel {
 		}
 	}
 
-	/** »­·ÉÐÐÎï */
+	/** ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ */
 	public void paintFlyingObjects(Graphics g) {
 		for (int i = 0; i < flyings.length; i++) {
 			FlyingObject f = flyings[i];
@@ -96,59 +96,59 @@ public class ShootGame extends JPanel {
 		}
 	}
 
-	/** »­·ÖÊý */
+	/** ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ */
 	public void paintScore(Graphics g) {
-		int x = 10; // x×ø±ê
-		int y = 25; // y×ø±ê
-		Font font = new Font(Font.SANS_SERIF, Font.BOLD, 22); // ×ÖÌå
+		int x = 10; // xï¿½ï¿½ï¿½ï¿½
+		int y = 25; // yï¿½ï¿½ï¿½ï¿½
+		Font font = new Font(Font.SANS_SERIF, Font.BOLD, 22); // ï¿½ï¿½ï¿½ï¿½
 		g.setColor(new Color(0xFF0000));
-		g.setFont(font); // ÉèÖÃ×ÖÌå
-		g.drawString("SCORE:" + score, x, y); // »­·ÖÊý
-		y=y+20; // y×ø±êÔö20
-		g.drawString("LIFE:" + hero.getLife(), x, y); // »­Ãü
+		g.setFont(font); // ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
+		g.drawString("SCORE:" + score, x, y); // ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
+		y=y+20; // yï¿½ï¿½ï¿½ï¿½ï¿½ï¿½20
+		g.drawString("LIFE:" + hero.getLife(), x, y); // ï¿½ï¿½ï¿½ï¿½
 	}
 
-	/** »­ÓÎÏ·×´Ì¬ */
+	/** ï¿½ï¿½ï¿½ï¿½Ï·×´Ì¬ */
 	public void paintState(Graphics g) {
 		switch (state) {
-		case START: // Æô¶¯×´Ì¬
+		case START: // ï¿½ï¿½ï¿½ï¿½×´Ì¬
 			g.drawImage(start, 0, 0, null);
 			break;
-		case PAUSE: // ÔÝÍ£×´Ì¬
+		case PAUSE: // ï¿½ï¿½Í£×´Ì¬
 			g.drawImage(pause, 0, 0, null);
 			break;
-		case GAME_OVER: // ÓÎÏ·ÖÕÖ¹×´Ì¬
+		case GAME_OVER: // ï¿½ï¿½Ï·ï¿½ï¿½Ö¹×´Ì¬
 			g.drawImage(gameover, 0, 0, null);
 			break;
 		}
 	}
 
 	public static void main(String[] args) {
-		String str = "1";
+		String str = "2";
 		if(str.equals("0"))
 		{
 			System.out.println("str");
 		}
 		JFrame frame = new JFrame("Fly");
-		ShootGame game = new ShootGame(); // Ãæ°å¶ÔÏó
-		frame.add(game); // ½«Ãæ°åÌí¼Óµ½JFrameÖÐ
-		frame.setSize(WIDTH, HEIGHT); // ÉèÖÃ´óÐ¡
-		frame.setAlwaysOnTop(true); // ÉèÖÃÆä×ÜÔÚ×îÉÏ
-		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE); // Ä¬ÈÏ¹Ø±Õ²Ù×÷
-		frame.setIconImage(new ImageIcon("images/icon.jpg").getImage()); // ÉèÖÃ´°ÌåµÄÍ¼±ê
-		frame.setLocationRelativeTo(null); // ÉèÖÃ´°Ìå³õÊ¼Î»ÖÃ
-		frame.setVisible(true); // ¾¡¿ìµ÷ÓÃpaint
+		ShootGame game = new ShootGame(); // ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
+		frame.add(game); // ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Óµï¿½JFrameï¿½ï¿½
+		frame.setSize(WIDTH, HEIGHT); // ï¿½ï¿½ï¿½Ã´ï¿½Ð¡
+		frame.setAlwaysOnTop(true); // ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
+		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE); // Ä¬ï¿½Ï¹Ø±Õ²ï¿½ï¿½ï¿½
+		frame.setIconImage(new ImageIcon("images/icon.jpg").getImage()); // ï¿½ï¿½ï¿½Ã´ï¿½ï¿½ï¿½ï¿½Í¼ï¿½ï¿½
+		frame.setLocationRelativeTo(null); // ï¿½ï¿½ï¿½Ã´ï¿½ï¿½ï¿½ï¿½Ê¼Î»ï¿½ï¿½
+		frame.setVisible(true); // ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½paint
 
-		game.action(); // Æô¶¯Ö´ÐÐ
+		game.action(); // ï¿½ï¿½ï¿½ï¿½Ö´ï¿½ï¿½
 	}
 
-	/** Æô¶¯Ö´ÐÐ´úÂë */
+	/** ï¿½ï¿½ï¿½ï¿½Ö´ï¿½Ð´ï¿½ï¿½ï¿½ */
 	public void action() {
-		// Êó±ê¼àÌýÊÂ¼þ
+		// ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Â¼ï¿½
 		MouseAdapter l = new MouseAdapter() {
 			@Override
-			public void mouseMoved(MouseEvent e) { // Êó±êÒÆ¶¯
-				if (state == RUNNING) { // ÔËÐÐ×´Ì¬ÏÂÒÆ¶¯Ó¢ÐÛ»ú--ËæÊó±êÎ»ÖÃ
+			public void mouseMoved(MouseEvent e) { // ï¿½ï¿½ï¿½ï¿½Æ¶ï¿½
+				if (state == RUNNING) { // ï¿½ï¿½ï¿½ï¿½×´Ì¬ï¿½ï¿½ï¿½Æ¶ï¿½Ó¢ï¿½Û»ï¿½--ï¿½ï¿½ï¿½ï¿½ï¿½Î»ï¿½ï¿½
 					int x = e.getX();
 					int y = e.getY();
 					hero.moveTo(x, y);
@@ -156,83 +156,83 @@ public class ShootGame extends JPanel {
 			}
 
 			@Override
-			public void mouseEntered(MouseEvent e) { // Êó±ê½øÈë
-				if (state == PAUSE) { // ÔÝÍ£×´Ì¬ÏÂÔËÐÐ
+			public void mouseEntered(MouseEvent e) { // ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
+				if (state == PAUSE) { // ï¿½ï¿½Í£×´Ì¬ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
 					state = RUNNING;
 				}
 			}
 
 			@Override
-			public void mouseExited(MouseEvent e) { // Êó±êÍË³ö
-				if (state == RUNNING) { // ÓÎÏ·Î´½áÊø£¬ÔòÉèÖÃÆäÎªÔÝÍ£
+			public void mouseExited(MouseEvent e) { // ï¿½ï¿½ï¿½ï¿½Ë³ï¿½
+				if (state == RUNNING) { // ï¿½ï¿½Ï·Î´ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Îªï¿½ï¿½Í£
 					state = PAUSE;
 				}
 			}
 
 			@Override
-			public void mouseClicked(MouseEvent e) { // Êó±êµã»÷
+			public void mouseClicked(MouseEvent e) { // ï¿½ï¿½ï¿½ï¿½ï¿½
 				switch (state) {
 				case START:
-					state = RUNNING; // Æô¶¯×´Ì¬ÏÂÔËÐÐ
+					state = RUNNING; // ï¿½ï¿½ï¿½ï¿½×´Ì¬ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
 					break;
-				case GAME_OVER: // ÓÎÏ·½áÊø£¬ÇåÀíÏÖ³¡
-					flyings = new FlyingObject[0]; // Çå¿Õ·ÉÐÐÎï
-					bullets = new Bullet[0]; // Çå¿Õ×Óµ¯
-					hero = new Hero(); // ÖØÐÂ´´½¨Ó¢ÐÛ»ú
-					score = 0; // Çå¿Õ³É¼¨
-					state = START; // ×´Ì¬ÉèÖÃÎªÆô¶¯
+				case GAME_OVER: // ï¿½ï¿½Ï·ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ö³ï¿½
+					flyings = new FlyingObject[0]; // ï¿½ï¿½Õ·ï¿½ï¿½ï¿½ï¿½ï¿½
+					bullets = new Bullet[0]; // ï¿½ï¿½ï¿½ï¿½Óµï¿½
+					hero = new Hero(); // ï¿½ï¿½ï¿½Â´ï¿½ï¿½ï¿½Ó¢ï¿½Û»ï¿½
+					score = 0; // ï¿½ï¿½Õ³É¼ï¿½
+					state = START; // ×´Ì¬ï¿½ï¿½ï¿½ï¿½Îªï¿½ï¿½ï¿½ï¿½
 					break;
 				}
 			}
 		};
-		this.addMouseListener(l); // ´¦ÀíÊó±êµã»÷²Ù×÷
-		this.addMouseMotionListener(l); // ´¦ÀíÊó±ê»¬¶¯²Ù×÷
+		this.addMouseListener(l); // ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
+		this.addMouseMotionListener(l); // ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ê»¬ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
 
-		timer = new Timer(); // Ö÷Á÷³Ì¿ØÖÆ
+		timer = new Timer(); // ï¿½ï¿½ï¿½ï¿½ï¿½Ì¿ï¿½ï¿½ï¿½
 		timer.schedule(new TimerTask() {
 			@Override
 			public void run() {
-				if (state == RUNNING) { // ÔËÐÐ×´Ì¬
-					enterAction(); // ·ÉÐÐÎïÈë³¡
-					stepAction(); // ×ßÒ»²½
-					shootAction(); // Ó¢ÐÛ»úÉä»÷
-					bangAction(); // ×Óµ¯´ò·ÉÐÐÎï
-					outOfBoundsAction(); // É¾³ýÔ½½ç·ÉÐÐÎï¼°×Óµ¯
-					checkGameOverAction(); // ¼ì²éÓÎÏ·½áÊø
+				if (state == RUNNING) { // ï¿½ï¿½ï¿½ï¿½×´Ì¬
+					enterAction(); // ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ë³¡
+					stepAction(); // ï¿½ï¿½Ò»ï¿½ï¿½
+					shootAction(); // Ó¢ï¿½Û»ï¿½ï¿½ï¿½ï¿½
+					bangAction(); // ï¿½Óµï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
+					outOfBoundsAction(); // É¾ï¿½ï¿½Ô½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¼°ï¿½Óµï¿½
+					checkGameOverAction(); // ï¿½ï¿½ï¿½ï¿½ï¿½Ï·ï¿½ï¿½ï¿½ï¿½
 				}
-				repaint(); // ÖØ»æ£¬µ÷ÓÃpaint()·½·¨
+				repaint(); // ï¿½Ø»æ£¬ï¿½ï¿½ï¿½ï¿½paint()ï¿½ï¿½ï¿½ï¿½
 			}
 
 		}, intervel, intervel);
 	}
 
-	int flyEnteredIndex = 0; // ·ÉÐÐÎïÈë³¡¼ÆÊý
+	int flyEnteredIndex = 0; // ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ë³¡ï¿½ï¿½ï¿½ï¿½
 
-	/** ·ÉÐÐÎïÈë³¡ */
+	/** ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ë³¡ */
 	public void enterAction() {
 		flyEnteredIndex++;
-		if (flyEnteredIndex % 40 == 0) { // 400ºÁÃëÉú³ÉÒ»¸ö·ÉÐÐÎï--10*40
-			FlyingObject obj = nextOne(); // Ëæ»úÉú³ÉÒ»¸ö·ÉÐÐÎï
+		if (flyEnteredIndex % 40 == 0) { // 400ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ò»ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½--10*40
+			FlyingObject obj = nextOne(); // ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ò»ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
 			flyings = Arrays.copyOf(flyings, flyings.length + 1);
 			flyings[flyings.length - 1] = obj;
 		}
 	}
 
-	/** ×ßÒ»²½ */
+	/** ï¿½ï¿½Ò»ï¿½ï¿½ */
 	public void stepAction() {
-		for (int i = 0; i < flyings.length; i++) { // ·ÉÐÐÎï×ßÒ»²½
+		for (int i = 0; i < flyings.length; i++) { // ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ò»ï¿½ï¿½
 			FlyingObject f = flyings[i];
 			f.step();
 		}
 
-		for (int i = 0; i < bullets.length; i++) { // ×Óµ¯×ßÒ»²½
+		for (int i = 0; i < bullets.length; i++) { // ï¿½Óµï¿½ï¿½ï¿½Ò»ï¿½ï¿½
 			Bullet b = bullets[i];
 			b.step();
 		}
-		hero.step(); // Ó¢ÐÛ»ú×ßÒ»²½
+		hero.step(); // Ó¢ï¿½Û»ï¿½ï¿½ï¿½Ò»ï¿½ï¿½
 	}
 
-	/** ·ÉÐÐÎï×ßÒ»²½ */
+	/** ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ò»ï¿½ï¿½ */
 	public void flyingStepAction() {
 		for (int i = 0; i < flyings.length; i++) {
 			FlyingObject f = flyings[i];
@@ -240,40 +240,40 @@ public class ShootGame extends JPanel {
 		}
 	}
 
-	int shootIndex = 0; // Éä»÷¼ÆÊý
+	int shootIndex = 0; // ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
 
-	/** Éä»÷ */
+	/** ï¿½ï¿½ï¿½ */
 	public void shootAction() {
 		shootIndex++;
-		if (shootIndex % 30 == 0) { // 300ºÁÃë·¢Ò»¿Å
-			Bullet[] bs = hero.shoot(); // Ó¢ÐÛ´ò³ö×Óµ¯
-			bullets = Arrays.copyOf(bullets, bullets.length + bs.length); // À©ÈÝ
+		if (shootIndex % 30 == 0) { // 300ï¿½ï¿½ï¿½ë·¢Ò»ï¿½ï¿½
+			Bullet[] bs = hero.shoot(); // Ó¢ï¿½Û´ï¿½ï¿½ï¿½Óµï¿½
+			bullets = Arrays.copyOf(bullets, bullets.length + bs.length); // ï¿½ï¿½ï¿½ï¿½
 			System.arraycopy(bs, 0, bullets, bullets.length - bs.length,
-					bs.length); // ×·¼ÓÊý×é
+					bs.length); // ×·ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
 		}
 	}
 
-	/** ×Óµ¯Óë·ÉÐÐÎïÅö×²¼ì²â */
+	/** ï¿½Óµï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½×²ï¿½ï¿½ï¿½ */
 	public void bangAction() {
-		for (int i = 0; i < bullets.length; i++) { // ±éÀúËùÓÐ×Óµ¯
+		for (int i = 0; i < bullets.length; i++) { // ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Óµï¿½
 			Bullet b = bullets[i];
-			bang(b); // ×Óµ¯ºÍ·ÉÐÐÎïÖ®¼äµÄÅö×²¼ì²é
+			bang(b); // ï¿½Óµï¿½ï¿½Í·ï¿½ï¿½ï¿½ï¿½ï¿½Ö®ï¿½ï¿½ï¿½ï¿½ï¿½×²ï¿½ï¿½ï¿½
 		}
 	}
 
-	/** É¾³ýÔ½½ç·ÉÐÐÎï¼°×Óµ¯ */
+	/** É¾ï¿½ï¿½Ô½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¼°ï¿½Óµï¿½ */
 	public void outOfBoundsAction() {
-		int index = 0; // Ë÷Òý
-		FlyingObject[] flyingLives = new FlyingObject[flyings.length]; // »î×ÅµÄ·ÉÐÐÎï
+		int index = 0; // ï¿½ï¿½ï¿½ï¿½
+		FlyingObject[] flyingLives = new FlyingObject[flyings.length]; // ï¿½ï¿½ï¿½ÅµÄ·ï¿½ï¿½ï¿½ï¿½ï¿½
 		for (int i = 0; i < flyings.length; i++) {
 			FlyingObject f = flyings[i];
 			if (!f.outOfBounds()) {
-				flyingLives[index++] = f; // ²»Ô½½çµÄÁô×Å
+				flyingLives[index++] = f; // ï¿½ï¿½Ô½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
 			}
 		}
-		flyings = Arrays.copyOf(flyingLives, index); // ½«²»Ô½½çµÄ·ÉÐÐÎï¶¼Áô×Å
+		flyings = Arrays.copyOf(flyingLives, index); // ï¿½ï¿½ï¿½ï¿½Ô½ï¿½ï¿½Ä·ï¿½ï¿½ï¿½ï¿½ï¶¼ï¿½ï¿½ï¿½ï¿½
 
-		index = 0; // Ë÷ÒýÖØÖÃÎª0
+		index = 0; // ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Îª0
 		Bullet[] bulletLives = new Bullet[bullets.length];
 		for (int i = 0; i < bullets.length; i++) {
 			Bullet b = bullets[i];
@@ -281,71 +281,71 @@ public class ShootGame extends JPanel {
 				bulletLives[index++] = b;
 			}
 		}
-		bullets = Arrays.copyOf(bulletLives, index); // ½«²»Ô½½çµÄ×Óµ¯Áô×Å
+		bullets = Arrays.copyOf(bulletLives, index); // ï¿½ï¿½ï¿½ï¿½Ô½ï¿½ï¿½ï¿½ï¿½Óµï¿½ï¿½ï¿½ï¿½ï¿½
 	}
 
-	/** ¼ì²éÓÎÏ·½áÊø */
+	/** ï¿½ï¿½ï¿½ï¿½ï¿½Ï·ï¿½ï¿½ï¿½ï¿½ */
 	public void checkGameOverAction() {
 		if (isGameOver()==true) {
-			state = GAME_OVER; // ¸Ä±ä×´Ì¬
+			state = GAME_OVER; // ï¿½Ä±ï¿½×´Ì¬
 		}
 	}
 
-	/** ¼ì²éÓÎÏ·ÊÇ·ñ½áÊø */
+	/** ï¿½ï¿½ï¿½ï¿½ï¿½Ï·ï¿½Ç·ï¿½ï¿½ï¿½ï¿½ */
 	public boolean isGameOver() {
 		
 		for (int i = 0; i < flyings.length; i++) {
 			int index = -1;
 			FlyingObject obj = flyings[i];
-			if (hero.hit(obj)) { // ¼ì²éÓ¢ÐÛ»úÓë·ÉÐÐÎïÊÇ·ñÅö×²
-				hero.subtractLife(); // ¼õÃü
-				hero.setDoubleFire(0); // Ë«±¶»ðÁ¦½â³ý
-				index = i; // ¼ÇÂ¼ÅöÉÏµÄ·ÉÐÐÎïË÷Òý
+			if (hero.hit(obj)) { // ï¿½ï¿½ï¿½Ó¢ï¿½Û»ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ç·ï¿½ï¿½ï¿½×²
+				hero.subtractLife(); // ï¿½ï¿½ï¿½ï¿½
+				hero.setDoubleFire(0); // Ë«ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
+				index = i; // ï¿½ï¿½Â¼ï¿½ï¿½ï¿½ÏµÄ·ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
 			}
 			if (index != -1) {
 				FlyingObject t = flyings[index];
 				flyings[index] = flyings[flyings.length - 1];
-				flyings[flyings.length - 1] = t; // ÅöÉÏµÄÓë×îºóÒ»¸ö·ÉÐÐÎï½»»»
+				flyings[flyings.length - 1] = t; // ï¿½ï¿½ï¿½Ïµï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ò»ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï½»ï¿½ï¿½
 
-				flyings = Arrays.copyOf(flyings, flyings.length - 1); // É¾³ýÅöÉÏµÄ·ÉÐÐÎï
+				flyings = Arrays.copyOf(flyings, flyings.length - 1); // É¾ï¿½ï¿½ï¿½ï¿½ï¿½ÏµÄ·ï¿½ï¿½ï¿½ï¿½ï¿½
 			}
 		}
 		
 		return hero.getLife() <= 0;
 	}
 
-	/** ×Óµ¯ºÍ·ÉÐÐÎïÖ®¼äµÄÅö×²¼ì²é */
+	/** ï¿½Óµï¿½ï¿½Í·ï¿½ï¿½ï¿½ï¿½ï¿½Ö®ï¿½ï¿½ï¿½ï¿½ï¿½×²ï¿½ï¿½ï¿½ */
 	public void bang(Bullet bullet) {
-		int index = -1; // »÷ÖÐµÄ·ÉÐÐÎïË÷Òý
+		int index = -1; // ï¿½ï¿½ï¿½ÐµÄ·ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
 		for (int i = 0; i < flyings.length; i++) {
 			FlyingObject obj = flyings[i];
-			if (obj.shootBy(bullet)) { // ÅÐ¶ÏÊÇ·ñ»÷ÖÐ
-				index = i; // ¼ÇÂ¼±»»÷ÖÐµÄ·ÉÐÐÎïµÄË÷Òý
+			if (obj.shootBy(bullet)) { // ï¿½Ð¶ï¿½ï¿½Ç·ï¿½ï¿½ï¿½ï¿½
+				index = i; // ï¿½ï¿½Â¼ï¿½ï¿½ï¿½ï¿½ï¿½ÐµÄ·ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
 				break;
 			}
 		}
-		if (index != -1) { // ÓÐ»÷ÖÐµÄ·ÉÐÐÎï
-			FlyingObject one = flyings[index]; // ¼ÇÂ¼±»»÷ÖÐµÄ·ÉÐÐÎï
+		if (index != -1) { // ï¿½Ð»ï¿½ï¿½ÐµÄ·ï¿½ï¿½ï¿½ï¿½ï¿½
+			FlyingObject one = flyings[index]; // ï¿½ï¿½Â¼ï¿½ï¿½ï¿½ï¿½ï¿½ÐµÄ·ï¿½ï¿½ï¿½ï¿½ï¿½
 
-			FlyingObject temp = flyings[index]; // ±»»÷ÖÐµÄ·ÉÐÐÎïÓë×îºóÒ»¸ö·ÉÐÐÎï½»»»
+			FlyingObject temp = flyings[index]; // ï¿½ï¿½ï¿½ï¿½ï¿½ÐµÄ·ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ò»ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï½»ï¿½ï¿½
 			flyings[index] = flyings[flyings.length - 1];
 			flyings[flyings.length - 1] = temp;
 
-			flyings = Arrays.copyOf(flyings, flyings.length - 1); // É¾³ý×îºóÒ»¸ö·ÉÐÐÎï(¼´±»»÷ÖÐµÄ)
+			flyings = Arrays.copyOf(flyings, flyings.length - 1); // É¾ï¿½ï¿½ï¿½ï¿½ï¿½Ò»ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½(ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ðµï¿½)
 
-			// ¼ì²éoneµÄÀàÐÍ(µÐÈË¼Ó·Ö£¬½±Àø»ñÈ¡)
-			if (one instanceof Enemy) { // ¼ì²éÀàÐÍ£¬ÊÇµÐÈË£¬Ôò¼Ó·Ö
-				Enemy e = (Enemy) one; // Ç¿ÖÆÀàÐÍ×ª»»
-				score += e.getScore(); // ¼Ó·Ö
-			} else { // ÈôÎª½±Àø£¬ÉèÖÃ½±Àø
+			// ï¿½ï¿½ï¿½oneï¿½ï¿½ï¿½ï¿½ï¿½ï¿½(ï¿½ï¿½ï¿½Ë¼Ó·Ö£ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½È¡)
+			if (one instanceof Enemy) { // ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Í£ï¿½ï¿½Çµï¿½ï¿½Ë£ï¿½ï¿½ï¿½Ó·ï¿½
+				Enemy e = (Enemy) one; // Ç¿ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½×ªï¿½ï¿½
+				score += e.getScore(); // ï¿½Ó·ï¿½
+			} else { // ï¿½ï¿½Îªï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ã½ï¿½ï¿½ï¿½
 				Award a = (Award) one;
-				int type = a.getType(); // »ñÈ¡½±ÀøÀàÐÍ
+				int type = a.getType(); // ï¿½ï¿½È¡ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
 				switch (type) {
 				case Award.DOUBLE_FIRE:
-					hero.addDoubleFire(); // ÉèÖÃË«±¶»ðÁ¦
+					hero.addDoubleFire(); // ï¿½ï¿½ï¿½ï¿½Ë«ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
 					break;
 				case Award.LIFE:
-					hero.addLife(); // ÉèÖÃ¼ÓÃü
+					hero.addLife(); // ï¿½ï¿½ï¿½Ã¼ï¿½ï¿½ï¿½
 					break;
 				}
 			}
@@ -353,9 +353,9 @@ public class ShootGame extends JPanel {
 	}
 
 	/**
-	 * Ëæ»úÉú³É·ÉÐÐÎï
+	 * ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½É·ï¿½ï¿½ï¿½ï¿½ï¿½
 	 * 
-	 * @return ·ÉÐÐÎï¶ÔÏó
+	 * @return ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
 	 */
 	public static FlyingObject nextOne() {
 		Random random = new Random();
