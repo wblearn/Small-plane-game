@@ -124,10 +124,10 @@ public class ShootGame extends JPanel {
 	}
 
 	public static void main(String[] args) {
-		String str = "2";
+		String str = null;
 		if(str.equals("0"))
 		{
-			System.out.println("str");
+			System.out.println(str);
 		}
 		JFrame frame = new JFrame("Fly");
 		ShootGame game = new ShootGame(); // ������
