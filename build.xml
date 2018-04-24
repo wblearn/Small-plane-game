@@ -21,6 +21,11 @@
             </fileset>
         </copy>
     </target>
+              	
+	 <target name="test">  
+	    <echo message="test echo messsage, basedir=${basedir}" />  
+	</target>  
+              	
     <target name="clean">
         <delete dir="bin"/>
     </target>
