@@ -43,7 +43,7 @@ public class ShootGame extends JPanel {
 	private FlyingObject[] flyings = {}; // 锟叫伙拷锟斤拷锟斤拷
 	private Bullet[] bullets = {}; // 锟接碉拷锟斤拷锟斤拷
 	private Hero hero = new Hero(); // 英锟桔伙拷
-	private int modify = 1;
+	
 
 	static { // 锟斤拷态锟斤拷锟斤拷椋拷锟绞硷拷锟酵计拷锟皆�
 		try {
@@ -125,6 +125,7 @@ public class ShootGame extends JPanel {
 	}
 
 	public static void main(String[] args) {
+		int modify = 1;
 		String str = "2";
 		if(str.equals("0"))
 		{
