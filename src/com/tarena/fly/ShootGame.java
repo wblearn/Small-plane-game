@@ -126,6 +126,7 @@ public class ShootGame extends JPanel {
 	public static void main(String[] args) {
 		String StuName="";
 		String str = "2";
+		int n=0;
 		if(str.equals("0"))
 		{
 			System.out.println("str");
