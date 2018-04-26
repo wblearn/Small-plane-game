@@ -17,18 +17,18 @@ import javax.swing.JFrame;
 import javax.swing.JPanel;
 
 public class ShootGame extends JPanel {
-	public static final int WIDTH = 400; // Ãæ°å¿í
-	public static final int HEIGHT = 654; // Ãæ°å¸ß
-	/** ÓÎÏ·µÄµ±Ç°×´Ì¬: START RUNNING PAUSE GAME_OVER */
+	public static final int WIDTH = 400; // é”Ÿæ–¤æ‹·é”Ÿæ–¤æ‹·
+	public static final int HEIGHT = 654; // é”Ÿæ–¤æ‹·é”Ÿæ–¤æ‹·
+	/** é”Ÿæ–¤æ‹·æˆé”Ÿä¾¥ç¢‰æ‹·å‰çŠ¶æ€: START RUNNING PAUSE GAME_OVER */
 	private int state;
 	private static final int START = 0;
 	private static final int RUNNING = 1;
 	private static final int PAUSE = 2;
 	private static final int GAME_OVER = 3;
 
-	private int score = 0; // µÃ·Ö
-	private Timer timer; // ¶¨Ê±Æ÷
-	private int intervel = 1000 / 100; // Ê±¼ä¼ä¸ô(ºÁÃë)
+	private int score = 0; // é”ŸçŸ«å‡¤æ‹·
+	private Timer timer; // é”Ÿæ–¤æ‹·æ—¶é”Ÿæ–¤æ‹·
+	private int intervel = 1000 / 100; // æ—¶é”Ÿæ–¤æ‹·é”Ÿæ–¤æ‹·(é”Ÿæ–¤æ‹·é”Ÿæ–¤æ‹·)
 
 	public static BufferedImage background;
 	public static BufferedImage start;
@@ -40,11 +40,11 @@ public class ShootGame extends JPanel {
 	public static BufferedImage pause;
 	public static BufferedImage gameover;
 
-	private FlyingObject[] flyings = {}; // µĞ»úÊı×é
-	private Bullet[] bullets = {}; // ×Óµ¯Êı×é
-	private Hero hero = new Hero(); // Ó¢ĞÛ»ú
+	private FlyingObject[] flyings = {}; // é”Ÿå«ä¼™æ‹·é”Ÿæ–¤æ‹·é”Ÿæ–¤æ‹·
+	private Bullet[] bullets = {}; // é”Ÿæ¥ç¢‰æ‹·é”Ÿæ–¤æ‹·é”Ÿæ–¤æ‹·
+	private Hero hero = new Hero(); // è‹±é”Ÿæ¡”ä¼™æ‹·
 
-	static { // ¾²Ì¬´úÂë¿é£¬³õÊ¼»¯Í¼Æ¬×ÊÔ´
+	static { // é”Ÿæ–¤æ‹·æ€é”Ÿæ–¤æ‹·é”Ÿæ–¤æ‹·æ¤‹î„Šæ‹·é”Ÿç»ç¡·æ‹·é”Ÿé…µè®¡î„Šæ‹·é”Ÿçš†ï¿½
 		try {
 			background = ImageIO.read(ShootGame.class
 					.getResource("background.png"));
@@ -53,7 +53,7 @@ public class ShootGame extends JPanel {
 					.read(ShootGame.class.getResource("airplane.png"));
 			bee = ImageIO.read(ShootGame.class.getResource("bee.png"));
 			bullet = ImageIO.read(ShootGame.class.getResource("bullet.png"));
-			hero0 = ImageIO.read(ShootGame.class.getResource("hero0.png"));
+			hero0 = ImageIO.read(ShootGame.class.getResource("hero0.png"));//é”Ÿæ–¤æ‹·é”Ÿæ–¤æ‹·é”Ÿå«è¾¾æ‹·
 			hero1 = ImageIO.read(ShootGame.class.getResource("hero1.png"));
 			pause = ImageIO.read(ShootGame.class.getResource("pause.png"));
 			gameover = ImageIO
@@ -63,23 +63,23 @@ public class ShootGame extends JPanel {
 		}
 	}
 
-	/** »­ */
+	/** é”Ÿæ–¤æ‹· */
 	@Override
 	public void paint(Graphics g) {
-		g.drawImage(background, 0, 0, null); // »­±³¾°Í¼
-		paintHero(g); // »­Ó¢ĞÛ»ú
-		paintBullets(g); // »­×Óµ¯
-		paintFlyingObjects(g); // »­·ÉĞĞÎï
-		paintScore(g); // »­·ÖÊı
-		paintState(g); // »­ÓÎÏ·×´Ì¬
+		g.drawImage(background, 0, 0, null); // é”Ÿæ–¤æ‹·é”Ÿæ–¤æ‹·é”Ÿæ–¤æ‹·å›¾
+		paintHero(g); // é”Ÿæ–¤æ‹·è‹±é”Ÿæ¡”ä¼™æ‹·
+		paintBullets(g); // é”Ÿæ–¤æ‹·é”Ÿæ¥ç¢‰æ‹·
+		paintFlyingObjects(g); // é”Ÿæ–¤æ‹·é”Ÿæ–¤æ‹·é”Ÿæ–¤æ‹·é”Ÿæ–¤æ‹·
+		paintScore(g); // é”Ÿæ–¤æ‹·é”Ÿæ–¤æ‹·é”Ÿæ–¤æ‹·
+		paintState(g); // é”Ÿæ–¤æ‹·é”Ÿæ–¤æ‹·æˆçŠ¶æ€
 	}
 
-	/** »­Ó¢ĞÛ»ú */
+	/** é”Ÿæ–¤æ‹·è‹±é”Ÿæ¡”ä¼™æ‹· */
 	public void paintHero(Graphics g) {
 		g.drawImage(hero.getImage(), hero.getX(), hero.getY(), null);
 	}
 
-	/** »­×Óµ¯ */
+	/** é”Ÿæ–¤æ‹·é”Ÿæ¥ç¢‰æ‹· */
 	public void paintBullets(Graphics g) {
 		for (int i = 0; i < bullets.length; i++) {
 			Bullet b = bullets[i];
@@ -88,7 +88,7 @@ public class ShootGame extends JPanel {
 		}
 	}
 
-	/** »­·ÉĞĞÎï */
+	/** é”Ÿæ–¤æ‹·é”Ÿæ–¤æ‹·é”Ÿæ–¤æ‹·é”Ÿæ–¤æ‹· */
 	public void paintFlyingObjects(Graphics g) {
 		for (int i = 0; i < flyings.length; i++) {
 			FlyingObject f = flyings[i];
@@ -96,54 +96,61 @@ public class ShootGame extends JPanel {
 		}
 	}
 
-	/** »­·ÖÊı */
+	/** é”Ÿæ–¤æ‹·é”Ÿæ–¤æ‹·é”Ÿæ–¤æ‹· */
 	public void paintScore(Graphics g) {
-		int x = 10; // x×ø±ê
-		int y = 25; // y×ø±ê
-		Font font = new Font(Font.SANS_SERIF, Font.BOLD, 22); // ×ÖÌå
+		int x = 10; // xé”Ÿæ–¤æ‹·é”Ÿæ–¤æ‹·
+		int y = 25; // yé”Ÿæ–¤æ‹·é”Ÿæ–¤æ‹·
+		Font font = new Font(Font.SANS_SERIF, Font.BOLD, 22); // é”Ÿæ–¤æ‹·é”Ÿæ–¤æ‹·
 		g.setColor(new Color(0xFF0000));
-		g.setFont(font); // ÉèÖÃ×ÖÌå
-		g.drawString("SCORE:" + score, x, y); // »­·ÖÊı
-		y=y+20; // y×ø±êÔö20
-		g.drawString("LIFE:" + hero.getLife(), x, y); // »­Ãü
+		g.setFont(font); // é”Ÿæ–¤æ‹·é”Ÿæ–¤æ‹·é”Ÿæ–¤æ‹·é”Ÿæ–¤æ‹·
+		g.drawString("SCORE:" + score, x, y); // é”Ÿæ–¤æ‹·é”Ÿæ–¤æ‹·é”Ÿæ–¤æ‹·
+		y=y+20; // yé”Ÿæ–¤æ‹·é”Ÿæ–¤æ‹·é”Ÿæ–¤æ‹·20
+		g.drawString("LIFE:" + hero.getLife(), x, y); // é”Ÿæ–¤æ‹·é”Ÿæ–¤æ‹·
 	}
 
-	/** »­ÓÎÏ·×´Ì¬ */
+	/** é”Ÿæ–¤æ‹·é”Ÿæ–¤æ‹·æˆçŠ¶æ€ */
 	public void paintState(Graphics g) {
 		switch (state) {
-		case START: // Æô¶¯×´Ì¬
+		case START: // é”Ÿæ–¤æ‹·é”Ÿæ–¤æ‹·çŠ¶æ€
 			g.drawImage(start, 0, 0, null);
 			break;
-		case PAUSE: // ÔİÍ£×´Ì¬
+		case PAUSE: // é”Ÿæ–¤æ‹·åœçŠ¶æ€
 			g.drawImage(pause, 0, 0, null);
 			break;
-		case GAME_OVER: // ÓÎÏ·ÖÕÖ¹×´Ì¬
+		case GAME_OVER: // é”Ÿæ–¤æ‹·æˆé”Ÿæ–¤æ‹·æ­¢çŠ¶æ€
 			g.drawImage(gameover, 0, 0, null);
 			break;
 		}
 	}
 
 	public static void main(String[] args) {
+		String StuName="";
+		String str = "2";
+		int n=0;
+		if(str.equals("0"))
+		{
+			System.out.println("str");
+		}
 		JFrame frame = new JFrame("Fly");
-		ShootGame game = new ShootGame(); // Ãæ°å¶ÔÏó
-		frame.add(game); // ½«Ãæ°åÌí¼Óµ½JFrameÖĞ
-		frame.setSize(WIDTH, HEIGHT); // ÉèÖÃ´óĞ¡
-		frame.setAlwaysOnTop(true); // ÉèÖÃÆä×ÜÔÚ×îÉÏ
-		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE); // Ä¬ÈÏ¹Ø±Õ²Ù×÷
-		frame.setIconImage(new ImageIcon("images/icon.jpg").getImage()); // ÉèÖÃ´°ÌåµÄÍ¼±ê
-		frame.setLocationRelativeTo(null); // ÉèÖÃ´°Ìå³õÊ¼Î»ÖÃ
-		frame.setVisible(true); // ¾¡¿ìµ÷ÓÃpaint
+		ShootGame game = new ShootGame(); // é”Ÿæ–¤æ‹·é”Ÿæ–¤æ‹·é”Ÿæ–¤æ‹·
+		frame.add(game); // é”Ÿæ–¤æ‹·é”Ÿæ–¤æ‹·é”Ÿæ–¤æ‹·é”Ÿæ¥ç¢‰æ‹·JFrameé”Ÿæ–¤æ‹·
+		frame.setSize(WIDTH, HEIGHT); // é”Ÿæ–¤æ‹·é”ŸçŸ«è¾¾æ‹·å°
+		frame.setAlwaysOnTop(true); // é”Ÿæ–¤æ‹·é”Ÿæ–¤æ‹·é”Ÿæ–¤æ‹·é”Ÿæ–¤æ‹·é”Ÿæ–¤æ‹·é”Ÿæ–¤æ‹·é”Ÿæ–¤æ‹·
+		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE); // é»˜é”Ÿè¾ƒå…³é—­è¯§æ‹·é”Ÿæ–¤æ‹·
+		frame.setIconImage(new ImageIcon("images/icon.jpg").getImage()); // é”Ÿæ–¤æ‹·é”ŸçŸ«è¾¾æ‹·é”Ÿæ–¤æ‹·é”Ÿé…µç¡·æ‹·é”Ÿï¿½
+		frame.setLocationRelativeTo(null); // é”Ÿæ–¤æ‹·é”ŸçŸ«è¾¾æ‹·é”Ÿæ–¤æ‹·é”Ÿç»å˜‰ä¼™æ‹·é”Ÿï¿½
+		frame.setVisible(true); // é”Ÿæ–¤æ‹·é”Ÿæ–¤æ‹·é”Ÿæ–¤æ‹·é”Ÿçµ§aint
 
-		game.action(); // Æô¶¯Ö´ĞĞ
+		game.action(); // é”Ÿæ–¤æ‹·é”Ÿæ–¤æ‹·æ‰§é”Ÿæ–¤æ‹·
 	}
 
-	/** Æô¶¯Ö´ĞĞ´úÂë */
+	/** é”Ÿæ–¤æ‹·é”Ÿæ–¤æ‹·æ‰§é”Ÿå«è¾¾æ‹·é”Ÿæ–¤æ‹· */
 	public void action() {
-		// Êó±ê¼àÌıÊÂ¼ş
+		// é”Ÿæ–¤æ‹·é”Ÿæ–¤æ‹·é”Ÿæ–¤æ‹·é”Ÿé“°ç¡·æ‹·
 		MouseAdapter l = new MouseAdapter() {
 			@Override
-			public void mouseMoved(MouseEvent e) { // Êó±êÒÆ¶¯
-				if (state == RUNNING) { // ÔËĞĞ×´Ì¬ÏÂÒÆ¶¯Ó¢ĞÛ»ú--ËæÊó±êÎ»ÖÃ
+			public void mouseMoved(MouseEvent e) { // é”Ÿæ–¤æ‹·é”Ÿæ–¤æ‹·è´«é”Ÿï¿½
+				if (state == RUNNING) { // é”Ÿæ–¤æ‹·é”Ÿæ–¤æ‹·çŠ¶æ€é”Ÿæ–¤æ‹·é”Ÿç‹¡è®¹æ‹·è‹±é”Ÿæ¡”ä¼™æ‹·--é”Ÿæ–¤æ‹·é”Ÿæ–¤æ‹·é”Ÿè½¿ä¼™æ‹·é”Ÿï¿½
 					int x = e.getX();
 					int y = e.getY();
 					hero.moveTo(x, y);
@@ -151,83 +158,83 @@ public class ShootGame extends JPanel {
 			}
 
 			@Override
-			public void mouseEntered(MouseEvent e) { // Êó±ê½øÈë
-				if (state == PAUSE) { // ÔİÍ£×´Ì¬ÏÂÔËĞĞ
+			public void mouseEntered(MouseEvent e) { // é”Ÿæ–¤æ‹·é”Ÿæ–¤æ‹·é”Ÿæ–¤æ‹·
+				if (state == PAUSE) { // é”Ÿæ–¤æ‹·åœçŠ¶æ€é”Ÿæ–¤æ‹·é”Ÿæ–¤æ‹·é”Ÿæ–¤æ‹·
 					state = RUNNING;
 				}
 			}
 
 			@Override
-			public void mouseExited(MouseEvent e) { // Êó±êÍË³ö
-				if (state == RUNNING) { // ÓÎÏ·Î´½áÊø£¬ÔòÉèÖÃÆäÎªÔİÍ£
+			public void mouseExited(MouseEvent e) { // é”Ÿæ–¤æ‹·é”Ÿæ–¤æ‹·é¡ºé”Ÿï¿½
+				if (state == RUNNING) { // é”Ÿæ–¤æ‹·æˆæœªé”Ÿæ–¤æ‹·é”Ÿæ–¤æ‹·é”Ÿæ–¤æ‹·é”Ÿæ–¤æ‹·é”Ÿæ–¤æ‹·é”Ÿæ–¤æ‹·é”Ÿæ–¤æ‹·ä¸ºé”Ÿæ–¤æ‹·åœ
 					state = PAUSE;
 				}
 			}
 
 			@Override
-			public void mouseClicked(MouseEvent e) { // Êó±êµã»÷
+			public void mouseClicked(MouseEvent e) { // é”Ÿæ–¤æ‹·é”Ÿæ–¤æ‹·é”Ÿï¿½
 				switch (state) {
 				case START:
-					state = RUNNING; // Æô¶¯×´Ì¬ÏÂÔËĞĞ
+					state = RUNNING; // é”Ÿæ–¤æ‹·é”Ÿæ–¤æ‹·çŠ¶æ€é”Ÿæ–¤æ‹·é”Ÿæ–¤æ‹·é”Ÿæ–¤æ‹·
 					break;
-				case GAME_OVER: // ÓÎÏ·½áÊø£¬ÇåÀíÏÖ³¡
-					flyings = new FlyingObject[0]; // Çå¿Õ·ÉĞĞÎï
-					bullets = new Bullet[0]; // Çå¿Õ×Óµ¯
-					hero = new Hero(); // ÖØĞÂ´´½¨Ó¢ĞÛ»ú
-					score = 0; // Çå¿Õ³É¼¨
-					state = START; // ×´Ì¬ÉèÖÃÎªÆô¶¯
+				case GAME_OVER: // é”Ÿæ–¤æ‹·æˆé”Ÿæ–¤æ‹·é”Ÿæ–¤æ‹·é”Ÿæ–¤æ‹·é”Ÿæ–¤æ‹·é”Ÿæ–¤æ‹·é”Ÿè¡—ç­¹æ‹·
+					flyings = new FlyingObject[0]; // é”Ÿæ–¤æ‹·è¾—é”Ÿæ–¤æ‹·é”Ÿæ–¤æ‹·é”Ÿï¿½
+					bullets = new Bullet[0]; // é”Ÿæ–¤æ‹·é”Ÿæ–¤æ‹·æ‹¥é”Ÿï¿½
+					hero = new Hero(); // é”Ÿæ–¤æ‹·é”Ÿé“°è¾¾æ‹·é”Ÿæ–¤æ‹·è‹±é”Ÿæ¡”ä¼™æ‹·
+					score = 0; // é”Ÿæ–¤æ‹·ç²˜æ‰é”Ÿï¿½
+					state = START; // çŠ¶æ€é”Ÿæ–¤æ‹·é”Ÿæ–¤æ‹·ä¸ºé”Ÿæ–¤æ‹·é”Ÿæ–¤æ‹·
 					break;
 				}
 			}
 		};
-		this.addMouseListener(l); // ´¦ÀíÊó±êµã»÷²Ù×÷
-		this.addMouseMotionListener(l); // ´¦ÀíÊó±ê»¬¶¯²Ù×÷
+		this.addMouseListener(l); // é”Ÿæ–¤æ‹·é”Ÿæ–¤æ‹·é”Ÿæ–¤æ‹·é”Ÿæ–¤æ‹·é”Ÿæ–¤æ‹·é”Ÿæ–¤æ‹·é”Ÿï¿½
+		this.addMouseMotionListener(l); // é”Ÿæ–¤æ‹·é”Ÿæ–¤æ‹·é”Ÿæ–¤æ‹·æ˜Šî„Šæ‹·é”Ÿæ–¤æ‹·é”Ÿæ–¤æ‹·é”Ÿï¿½
 
-		timer = new Timer(); // Ö÷Á÷³Ì¿ØÖÆ
+		timer = new Timer(); // é”Ÿæ–¤æ‹·é”Ÿæ–¤æ‹·é”Ÿæ•™åŒ¡æ‹·é”Ÿæ–¤æ‹·
 		timer.schedule(new TimerTask() {
 			@Override
 			public void run() {
-				if (state == RUNNING) { // ÔËĞĞ×´Ì¬
-					enterAction(); // ·ÉĞĞÎïÈë³¡
-					stepAction(); // ×ßÒ»²½
-					shootAction(); // Ó¢ĞÛ»úÉä»÷
-					bangAction(); // ×Óµ¯´ò·ÉĞĞÎï
-					outOfBoundsAction(); // É¾³ıÔ½½ç·ÉĞĞÎï¼°×Óµ¯
-					checkGameOverAction(); // ¼ì²éÓÎÏ·½áÊø
+				if (state == RUNNING) { // é”Ÿæ–¤æ‹·é”Ÿæ–¤æ‹·çŠ¶æ€
+					enterAction(); // é”Ÿæ–¤æ‹·é”Ÿæ–¤æ‹·é”Ÿæ–¤æ‹·é”Ÿè¯«åœº
+					stepAction(); // é”Ÿæ–¤æ‹·ä¸€é”Ÿæ–¤æ‹·
+					shootAction(); // è‹±é”Ÿæ¡”ä¼™æ‹·é”Ÿæ–¤æ‹·é”Ÿï¿½
+					bangAction(); // é”Ÿæ¥ç¢‰æ‹·é”Ÿæ–¤æ‹·é”Ÿæ–¤æ‹·é”Ÿæ–¤æ‹·é”Ÿï¿½
+					outOfBoundsAction(); // åˆ é”Ÿæ–¤æ‹·è¶Šé”Ÿæ–¤æ‹·é”Ÿæ–¤æ‹·é”Ÿæ–¤æ‹·é”›å¸®æ‹·æ‹¥é”Ÿï¿½
+					checkGameOverAction(); // é”Ÿæ–¤æ‹·é”Ÿæ–¤æ‹·é”Ÿè¾ƒå‡¤æ‹·é”Ÿæ–¤æ‹·é”Ÿï¿½
 				}
-				repaint(); // ÖØ»æ£¬µ÷ÓÃpaint()·½·¨
+				repaint(); // é”Ÿæˆªç»˜ï¼Œé”Ÿæ–¤æ‹·é”Ÿæ–¤æ‹·paint()é”Ÿæ–¤æ‹·é”Ÿæ–¤æ‹·
 			}
 
 		}, intervel, intervel);
 	}
 
-	int flyEnteredIndex = 0; // ·ÉĞĞÎïÈë³¡¼ÆÊı
+	int flyEnteredIndex = 0; // é”Ÿæ–¤æ‹·é”Ÿæ–¤æ‹·é”Ÿæ–¤æ‹·é”Ÿè¯«åœºé”Ÿæ–¤æ‹·é”Ÿæ–¤æ‹·
 
-	/** ·ÉĞĞÎïÈë³¡ */
+	/** é”Ÿæ–¤æ‹·é”Ÿæ–¤æ‹·é”Ÿæ–¤æ‹·é”Ÿè¯«åœº */
 	public void enterAction() {
 		flyEnteredIndex++;
-		if (flyEnteredIndex % 40 == 0) { // 400ºÁÃëÉú³ÉÒ»¸ö·ÉĞĞÎï--10*40
-			FlyingObject obj = nextOne(); // Ëæ»úÉú³ÉÒ»¸ö·ÉĞĞÎï
+		if (flyEnteredIndex % 40 == 0) { // 400é”Ÿæ–¤æ‹·é”Ÿæ–¤æ‹·é”Ÿæ–¤æ‹·é”Ÿæ–¤æ‹·ä¸€é”Ÿæ–¤æ‹·é”Ÿæ–¤æ‹·é”Ÿæ–¤æ‹·é”Ÿæ–¤æ‹·--10*40
+			FlyingObject obj = nextOne(); // é”Ÿæ–¤æ‹·é”Ÿæ–¤æ‹·é”Ÿæ–¤æ‹·é”Ÿæ­ä¼™æ‹·é”Ÿæ–¤æ‹·é”Ÿæ–¤æ‹·é”Ÿæ–¤æ‹·é”Ÿï¿½
 			flyings = Arrays.copyOf(flyings, flyings.length + 1);
 			flyings[flyings.length - 1] = obj;
 		}
 	}
 
-	/** ×ßÒ»²½ */
+	/** é”Ÿæ–¤æ‹·ä¸€é”Ÿæ–¤æ‹· */
 	public void stepAction() {
-		for (int i = 0; i < flyings.length; i++) { // ·ÉĞĞÎï×ßÒ»²½
+		for (int i = 0; i < flyings.length; i++) { // é”Ÿæ–¤æ‹·é”Ÿæ–¤æ‹·é”Ÿæ–¤æ‹·é”Ÿæ–¤æ‹·ä¸€é”Ÿæ–¤æ‹·
 			FlyingObject f = flyings[i];
 			f.step();
 		}
 
-		for (int i = 0; i < bullets.length; i++) { // ×Óµ¯×ßÒ»²½
+		for (int i = 0; i < bullets.length; i++) { // é”Ÿæ¥ç¢‰æ‹·é”Ÿæ–¤æ‹·ä¸€é”Ÿæ–¤æ‹·
 			Bullet b = bullets[i];
 			b.step();
 		}
-		hero.step(); // Ó¢ĞÛ»ú×ßÒ»²½
+		hero.step(); // è‹±é”Ÿæ¡”ä¼™æ‹·é”Ÿæ–¤æ‹·ä¸€é”Ÿæ–¤æ‹·
 	}
 
-	/** ·ÉĞĞÎï×ßÒ»²½ */
+	/** é”Ÿæ–¤æ‹·é”Ÿæ–¤æ‹·é”Ÿæ–¤æ‹·é”Ÿæ–¤æ‹·ä¸€é”Ÿæ–¤æ‹· */
 	public void flyingStepAction() {
 		for (int i = 0; i < flyings.length; i++) {
 			FlyingObject f = flyings[i];
@@ -235,40 +242,40 @@ public class ShootGame extends JPanel {
 		}
 	}
 
-	int shootIndex = 0; // Éä»÷¼ÆÊı
+	int shootIndex = 0; // é”Ÿæ–¤æ‹·é”Ÿæ–¤æ‹·é”Ÿæ–¤æ‹·é”Ÿï¿½
 
-	/** Éä»÷ */
+	/** é”Ÿæ–¤æ‹·é”Ÿï¿½ */
 	public void shootAction() {
 		shootIndex++;
-		if (shootIndex % 30 == 0) { // 300ºÁÃë·¢Ò»¿Å
-			Bullet[] bs = hero.shoot(); // Ó¢ĞÛ´ò³ö×Óµ¯
-			bullets = Arrays.copyOf(bullets, bullets.length + bs.length); // À©Èİ
+		if (shootIndex % 30 == 0) { // 300é”Ÿæ–¤æ‹·é”Ÿè¯«å‘ä¸€é”Ÿæ–¤æ‹·
+			Bullet[] bs = hero.shoot(); // è‹±é”Ÿæ¡”è¾¾æ‹·é”Ÿæ–¤æ‹·æ‹¥é”Ÿï¿½
+			bullets = Arrays.copyOf(bullets, bullets.length + bs.length); // é”Ÿæ–¤æ‹·é”Ÿæ–¤æ‹·
 			System.arraycopy(bs, 0, bullets, bullets.length - bs.length,
-					bs.length); // ×·¼ÓÊı×é
+					bs.length); // è¿½é”Ÿæ–¤æ‹·é”Ÿæ–¤æ‹·é”Ÿæ–¤æ‹·
 		}
 	}
 
-	/** ×Óµ¯Óë·ÉĞĞÎïÅö×²¼ì²â */
+	/** é”Ÿæ¥ç¢‰æ‹·é”Ÿæ–¤æ‹·é”Ÿæ–¤æ‹·é”Ÿæ–¤æ‹·é”Ÿæ–¤æ‹·é”Ÿé˜¶è¯§æ‹·é”Ÿæ–¤æ‹· */
 	public void bangAction() {
-		for (int i = 0; i < bullets.length; i++) { // ±éÀúËùÓĞ×Óµ¯
+		for (int i = 0; i < bullets.length; i++) { // é”Ÿæ–¤æ‹·é”Ÿæ–¤æ‹·é”Ÿæ–¤æ‹·é”Ÿæ–¤æ‹·é”Ÿæ¥ç¢‰æ‹·
 			Bullet b = bullets[i];
-			bang(b); // ×Óµ¯ºÍ·ÉĞĞÎïÖ®¼äµÄÅö×²¼ì²é
+			bang(b); // é”Ÿæ¥ç¢‰æ‹·é”Ÿé…µå‡¤æ‹·é”Ÿæ–¤æ‹·é”Ÿæ–¤æ‹·ä¹‹é”Ÿæ–¤æ‹·é”Ÿæ–¤æ‹·é”Ÿé˜¶è¯§æ‹·é”Ÿæ–¤æ‹·
 		}
 	}
 
-	/** É¾³ıÔ½½ç·ÉĞĞÎï¼°×Óµ¯ */
+	/** åˆ é”Ÿæ–¤æ‹·è¶Šé”Ÿæ–¤æ‹·é”Ÿæ–¤æ‹·é”Ÿæ–¤æ‹·é”›å¸®æ‹·æ‹¥é”Ÿï¿½ */
 	public void outOfBoundsAction() {
-		int index = 0; // Ë÷Òı
-		FlyingObject[] flyingLives = new FlyingObject[flyings.length]; // »î×ÅµÄ·ÉĞĞÎï
+		int index = 0; // é”Ÿæ–¤æ‹·é”Ÿæ–¤æ‹·
+		FlyingObject[] flyingLives = new FlyingObject[flyings.length]; // é”Ÿæ–¤æ‹·é”Ÿè„šçš„å‡¤æ‹·é”Ÿæ–¤æ‹·é”Ÿæ–¤æ‹·
 		for (int i = 0; i < flyings.length; i++) {
 			FlyingObject f = flyings[i];
 			if (!f.outOfBounds()) {
-				flyingLives[index++] = f; // ²»Ô½½çµÄÁô×Å
+				flyingLives[index++] = f; // é”Ÿæ–¤æ‹·è¶Šé”Ÿæ–¤æ‹·é”Ÿæ–¤æ‹·é”Ÿæ–¤æ‹·é”Ÿï¿½
 			}
 		}
-		flyings = Arrays.copyOf(flyingLives, index); // ½«²»Ô½½çµÄ·ÉĞĞÎï¶¼Áô×Å
+		flyings = Arrays.copyOf(flyingLives, index); // é”Ÿæ–¤æ‹·é”Ÿæ–¤æ‹·è¶Šé”Ÿæ–¤æ‹·å§†é”Ÿæ–¤æ‹·é”Ÿæ–¤æ‹·é”’ç¡·æ‹·é”Ÿæ–¤æ‹·é”Ÿï¿½
 
-		index = 0; // Ë÷ÒıÖØÖÃÎª0
+		index = 0; // é”Ÿæ–¤æ‹·é”Ÿæ–¤æ‹·é”Ÿæ–¤æ‹·é”Ÿæ–¤æ‹·ä¸º0
 		Bullet[] bulletLives = new Bullet[bullets.length];
 		for (int i = 0; i < bullets.length; i++) {
 			Bullet b = bullets[i];
@@ -276,71 +283,71 @@ public class ShootGame extends JPanel {
 				bulletLives[index++] = b;
 			}
 		}
-		bullets = Arrays.copyOf(bulletLives, index); // ½«²»Ô½½çµÄ×Óµ¯Áô×Å
+		bullets = Arrays.copyOf(bulletLives, index); // é”Ÿæ–¤æ‹·é”Ÿæ–¤æ‹·è¶Šé”Ÿæ–¤æ‹·é”Ÿæ–¤æ‹·æ‹¥é”Ÿæ–¤æ‹·é”Ÿæ–¤æ‹·é”Ÿï¿½
 	}
 
-	/** ¼ì²éÓÎÏ·½áÊø */
+	/** é”Ÿæ–¤æ‹·é”Ÿæ–¤æ‹·é”Ÿè¾ƒå‡¤æ‹·é”Ÿæ–¤æ‹·é”Ÿï¿½ */
 	public void checkGameOverAction() {
 		if (isGameOver()==true) {
-			state = GAME_OVER; // ¸Ä±ä×´Ì¬
+			state = GAME_OVER; // é”Ÿä¾¥æ†‹æ‹·çŠ¶æ€
 		}
 	}
 
-	/** ¼ì²éÓÎÏ·ÊÇ·ñ½áÊø */
+	/** é”Ÿæ–¤æ‹·é”Ÿæ–¤æ‹·é”Ÿè¾ƒå‡¤æ‹·æ¬ é”Ÿæ–¤æ‹·é”Ÿæ–¤æ‹· */
 	public boolean isGameOver() {
 		
 		for (int i = 0; i < flyings.length; i++) {
 			int index = -1;
 			FlyingObject obj = flyings[i];
-			if (hero.hit(obj)) { // ¼ì²éÓ¢ĞÛ»úÓë·ÉĞĞÎïÊÇ·ñÅö×²
-				hero.subtractLife(); // ¼õÃü
-				hero.setDoubleFire(0); // Ë«±¶»ğÁ¦½â³ı
-				index = i; // ¼ÇÂ¼ÅöÉÏµÄ·ÉĞĞÎïË÷Òı
+			if (hero.hit(obj)) { // é”Ÿæ–¤æ‹·é”Ÿæ¥î®æ‹·åˆé”Ÿæ–¤æ‹·é”Ÿæ–¤æ‹·é”Ÿæ–¤æ‹·é”Ÿæ–¤æ‹·é”Ÿè§’å‡¤æ‹·é”Ÿæ–¤æ‹·æ’
+				hero.subtractLife(); // é”Ÿæ–¤æ‹·é”Ÿæ–¤æ‹·
+				hero.setDoubleFire(0); // åŒé”Ÿæ–¤æ‹·é”Ÿæ–¤æ‹·é”Ÿæ–¤æ‹·é”Ÿæ–¤æ‹·é”Ÿï¿½
+				index = i; // é”Ÿæ–¤æ‹·å½•é”Ÿæ–¤æ‹·é”Ÿè¾ƒçš„å‡¤æ‹·é”Ÿæ–¤æ‹·é”Ÿæ–¤æ‹·é”Ÿæ–¤æ‹·é”Ÿæ–¤æ‹·
 			}
 			if (index != -1) {
 				FlyingObject t = flyings[index];
 				flyings[index] = flyings[flyings.length - 1];
-				flyings[flyings.length - 1] = t; // ÅöÉÏµÄÓë×îºóÒ»¸ö·ÉĞĞÎï½»»»
+				flyings[flyings.length - 1] = t; // é”Ÿæ–¤æ‹·é”Ÿè¾ƒç¢‰æ‹·é”Ÿæ–¤æ‹·é”Ÿæ–¤æ‹·é”Ÿæ­ä¼™æ‹·é”Ÿæ–¤æ‹·é”Ÿæ–¤æ‹·é”Ÿæ–¤æ‹·é”ä¼™æ‹·é”Ÿï¿½
 
-				flyings = Arrays.copyOf(flyings, flyings.length - 1); // É¾³ıÅöÉÏµÄ·ÉĞĞÎï
+				flyings = Arrays.copyOf(flyings, flyings.length - 1); // åˆ é”Ÿæ–¤æ‹·é”Ÿæ–¤æ‹·é”Ÿè¾ƒçš„å‡¤æ‹·é”Ÿæ–¤æ‹·é”Ÿæ–¤æ‹·
 			}
 		}
 		
 		return hero.getLife() <= 0;
 	}
 
-	/** ×Óµ¯ºÍ·ÉĞĞÎïÖ®¼äµÄÅö×²¼ì²é */
+	/** é”Ÿæ¥ç¢‰æ‹·é”Ÿé…µå‡¤æ‹·é”Ÿæ–¤æ‹·é”Ÿæ–¤æ‹·ä¹‹é”Ÿæ–¤æ‹·é”Ÿæ–¤æ‹·é”Ÿé˜¶è¯§æ‹·é”Ÿæ–¤æ‹· */
 	public void bang(Bullet bullet) {
-		int index = -1; // »÷ÖĞµÄ·ÉĞĞÎïË÷Òı
+		int index = -1; // é”Ÿæ–¤æ‹·é”Ÿå«çš„å‡¤æ‹·é”Ÿæ–¤æ‹·é”Ÿæ–¤æ‹·é”Ÿæ–¤æ‹·é”Ÿæ–¤æ‹·
 		for (int i = 0; i < flyings.length; i++) {
 			FlyingObject obj = flyings[i];
-			if (obj.shootBy(bullet)) { // ÅĞ¶ÏÊÇ·ñ»÷ÖĞ
-				index = i; // ¼ÇÂ¼±»»÷ÖĞµÄ·ÉĞĞÎïµÄË÷Òı
+			if (obj.shootBy(bullet)) { // é”Ÿå«è®¹æ‹·é”Ÿè§’å‡¤æ‹·é”Ÿæ–¤æ‹·é”Ÿï¿½
+				index = i; // é”Ÿæ–¤æ‹·å½•é”Ÿæ–¤æ‹·é”Ÿæ–¤æ‹·é”Ÿå«çš„å‡¤æ‹·é”Ÿæ–¤æ‹·é”Ÿæ–¤æ‹·é”Ÿæ–¤æ‹·é”Ÿæ–¤æ‹·é”Ÿï¿½
 				break;
 			}
 		}
-		if (index != -1) { // ÓĞ»÷ÖĞµÄ·ÉĞĞÎï
-			FlyingObject one = flyings[index]; // ¼ÇÂ¼±»»÷ÖĞµÄ·ÉĞĞÎï
+		if (index != -1) { // é”Ÿå«ä¼™æ‹·é”Ÿå«çš„å‡¤æ‹·é”Ÿæ–¤æ‹·é”Ÿæ–¤æ‹·
+			FlyingObject one = flyings[index]; // é”Ÿæ–¤æ‹·å½•é”Ÿæ–¤æ‹·é”Ÿæ–¤æ‹·é”Ÿå«çš„å‡¤æ‹·é”Ÿæ–¤æ‹·é”Ÿæ–¤æ‹·
 
-			FlyingObject temp = flyings[index]; // ±»»÷ÖĞµÄ·ÉĞĞÎïÓë×îºóÒ»¸ö·ÉĞĞÎï½»»»
+			FlyingObject temp = flyings[index]; // é”Ÿæ–¤æ‹·é”Ÿæ–¤æ‹·é”Ÿå«çš„å‡¤æ‹·é”Ÿæ–¤æ‹·é”Ÿæ–¤æ‹·é”Ÿæ–¤æ‹·é”Ÿæ–¤æ‹·é”Ÿæ­ä¼™æ‹·é”Ÿæ–¤æ‹·é”Ÿæ–¤æ‹·é”Ÿæ–¤æ‹·é”ä¼™æ‹·é”Ÿï¿½
 			flyings[index] = flyings[flyings.length - 1];
 			flyings[flyings.length - 1] = temp;
 
-			flyings = Arrays.copyOf(flyings, flyings.length - 1); // É¾³ı×îºóÒ»¸ö·ÉĞĞÎï(¼´±»»÷ÖĞµÄ)
+			flyings = Arrays.copyOf(flyings, flyings.length - 1); // åˆ é”Ÿæ–¤æ‹·é”Ÿæ–¤æ‹·é”Ÿæ­ä¼™æ‹·é”Ÿæ–¤æ‹·é”Ÿæ–¤æ‹·é”Ÿæ–¤æ‹·é”Ÿï¿½(é”Ÿæ–¤æ‹·é”Ÿæ–¤æ‹·é”Ÿæ–¤æ‹·é”Ÿå«ç¢‰æ‹·)
 
-			// ¼ì²éoneµÄÀàĞÍ(µĞÈË¼Ó·Ö£¬½±Àø»ñÈ¡)
-			if (one instanceof Enemy) { // ¼ì²éÀàĞÍ£¬ÊÇµĞÈË£¬Ôò¼Ó·Ö
-				Enemy e = (Enemy) one; // Ç¿ÖÆÀàĞÍ×ª»»
-				score += e.getScore(); // ¼Ó·Ö
-			} else { // ÈôÎª½±Àø£¬ÉèÖÃ½±Àø
+			// é”Ÿæ–¤æ‹·é”Ÿçµ¦neé”Ÿæ–¤æ‹·é”Ÿæ–¤æ‹·é”Ÿæ–¤æ‹·(é”Ÿæ–¤æ‹·é”Ÿå‰¿åŠ åˆ†ï½æ‹·é”Ÿæ–¤æ‹·é”Ÿæ–¤æ‹·é”Ÿæ–¤æ‹·å–)
+			if (one instanceof Enemy) { // é”Ÿæ–¤æ‹·é”Ÿæ–¤æ‹·é”Ÿæ–¤æ‹·åœé”Ÿæ–¤æ‹·å ‘é”Ÿæ–¤æ‹·è€é”Ÿæ–¤æ‹·é”Ÿæ¥å‡¤æ‹·
+				Enemy e = (Enemy) one; // å¼ºé”Ÿæ–¤æ‹·é”Ÿæ–¤æ‹·é”Ÿæ–¤æ‹·è½¬é”Ÿæ–¤æ‹·
+				score += e.getScore(); // é”Ÿæ¥å‡¤æ‹·
+			} else { // é”Ÿæ–¤æ‹·ä¸ºé”Ÿæ–¤æ‹·é”Ÿæ–¤æ‹·é”Ÿæ–¤æ‹·é”Ÿæ–¤æ‹·é”ŸçŸ«æ–¤æ‹·é”Ÿæ–¤æ‹·
 				Award a = (Award) one;
-				int type = a.getType(); // »ñÈ¡½±ÀøÀàĞÍ
+				int type = a.getType(); // é”Ÿæ–¤æ‹·å–é”Ÿæ–¤æ‹·é”Ÿæ–¤æ‹·é”Ÿæ–¤æ‹·é”Ÿæ–¤æ‹·
 				switch (type) {
 				case Award.DOUBLE_FIRE:
-					hero.addDoubleFire(); // ÉèÖÃË«±¶»ğÁ¦
+					hero.addDoubleFire(); // é”Ÿæ–¤æ‹·é”Ÿæ–¤æ‹·åŒé”Ÿæ–¤æ‹·é”Ÿæ–¤æ‹·é”Ÿæ–¤æ‹·
 					break;
 				case Award.LIFE:
-					hero.addLife(); // ÉèÖÃ¼ÓÃü
+					hero.addLife(); // é”Ÿæ–¤æ‹·é”ŸçŸ«ç¡·æ‹·é”Ÿæ–¤æ‹·
 					break;
 				}
 			}
@@ -348,9 +355,9 @@ public class ShootGame extends JPanel {
 	}
 
 	/**
-	 * Ëæ»úÉú³É·ÉĞĞÎï
+	 * é”Ÿæ–¤æ‹·é”Ÿæ–¤æ‹·é”Ÿæ–¤æ‹·ç…é”Ÿæ–¤æ‹·é”Ÿæ–¤æ‹·é”Ÿï¿½
 	 * 
-	 * @return ·ÉĞĞÎï¶ÔÏó
+	 * @return é”Ÿæ–¤æ‹·é”Ÿæ–¤æ‹·é”Ÿæ–¤æ‹·é”Ÿæ–¤æ‹·é”Ÿï¿½
 	 */
 	public static FlyingObject nextOne() {
 		Random random = new Random();
