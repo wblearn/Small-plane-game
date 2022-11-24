@@ -1,4 +1,4 @@
-![](http://wblearn.github.io/Small-plane-game/2556999-1a2ad6a9a6690588.gif)
+![](http://wblearn.github.io/img/in-post/public/2556999-1a2ad6a9a6690588.gif)
 
 ## 写在前面
 
@@ -717,7 +717,7 @@ public class ShootGame extends JPanel {  
 #写在最后
 以上就是这个游戏我整理的完整代码，因为图片差不多9张，所以图片没上传，需要图片的友友请简信我，最后，我做了一张思维导图贴出来让大家更好的理解OOP面向对象编程的过程。
 
-![](http://wblearn.github.io/Small-plane-game/2556999-8217513e89c06a4a.webp)
+![](http://wblearn.github.io/img/in-post/public/2556999-8217513e89c06a4a.webp)
 
 
 
